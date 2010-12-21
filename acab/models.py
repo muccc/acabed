@@ -21,9 +21,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core import exceptions
 from django import forms
-
-import sys
-sys.path.append("externals")
 from stdimage import StdImageField
 
 import json

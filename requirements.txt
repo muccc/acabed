@@ -1,0 +1,11 @@
+# requirements.txt is a pip requirements file.
+#
+# list all required packages here.
+# install them with 'pip install -r requirements.txt'.
+
+Django==1.2.3
+django-dajaxice
+django-dajax
+django_compressor
+BeautifulSoup
+PIL
