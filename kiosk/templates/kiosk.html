@@ -1,0 +1,33 @@
+<div id="kioskbox">
+<div id="live_content">
+<h1>Initializing...</h1>
+</div>
+
+<ul>
+<li><a href="{% url acab.views.index %}">ACABED</a></li>
+<li><a href="">Select</a></li>
+</ul>
+
+</div>
+
+<script type='text/javascript'>
+window.addEvent('domready', function() {
+    $('live_content').set('load', {'autoCancel' : 'true', 'method' : 'get' } );
+    
+    function refresh() {
+        $('live_content').load('/kiosk/live');
+    }
+    
+    refresh.periodical(1000);
+    //needs to be called once, or you will have to wait 4 seconds for the first time
+    refresh();
+});
+</script>
+
+<style type='text/css'>
+	#kioskbox {
+		width: 100%;
+		height: 100px;
+		background-color: grey;
+	}
+</style>

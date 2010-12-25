@@ -1,6 +1,7 @@
 # acabed - webeditor for blinkenlights xml files
 # Copyright (C) 2010 Raffael Mancini <raffael.mancini@hcl-club.lu>
 #                    Franz Pletz <fpletz@fnordicwalking.de>
+#                    Sebastian Steuer <iggy@zxzy.de>
 #
 # This file is part of acabed.
 #
@@ -18,21 +19,8 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 from django.conf.urls.defaults import *
-from django.conf import settings
-
-from django.contrib import admin
-admin.autodiscover()
-
-from dajaxice.core import dajaxice_autodiscover
-dajaxice_autodiscover()
 
 urlpatterns = patterns('',
-    (r'^$', 'django.views.generic.simple.redirect_to', {'url': '/acabed/'}),
-    (r'^acabed/', include('acab.urls')),
-    (r'^kiosk/', include('kiosk.urls')),
-    (r'^assets/(?P<path>.*)$', 'django.views.static.serve',
-        {'document_root': settings.MEDIA_ROOT}),
-    (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    (r'^admin/', include(admin.site.urls)),
-    (r'^%s/' % settings.DAJAXICE_MEDIA_PREFIX, include('dajaxice.urls')),
+    (r'^select$', 'kiosk.views.select'),
+    (r'^live$', 'kiosk.views.live'),
 )
