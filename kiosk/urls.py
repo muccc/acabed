@@ -21,6 +21,7 @@
 from django.conf.urls.defaults import *
 
 urlpatterns = patterns('',
-    (r'^select$', 'kiosk.views.select'),
-    (r'^live$', 'kiosk.views.live'),
+    url(r'^select$', 'kiosk.views.select', name="kiosk_select"),
+    url(r'^live$', 'kiosk.views.live', name='kiosk_live'),
+    url(r'^request/set/', 'kiosk.views.set', name='kiosk_set')
 )

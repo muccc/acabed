@@ -1,4 +1,20 @@
-<h1>onscreen: {{now}}</h1>
+<h1>Playing: {{now}}</h1>
+	{% if now.type == "l" or now.type == 'e' %}
+		SR:{{now.streamRequest.id}}
+		<button id = "button_abort" onclick = "setState({{now.streamRequest.id}},'x');">Abort</button>
+	{% endif %}
 {% if request %}
 	<h1>Request: {{request}}</h1>
+		<button id = "button_allow" onclick = "setState({{request.id}},'a');">Allow</button>
+		<button id = "button_deny" onclick = "setState({{request.id}}, 'd');">Deny</button>
 {% endif %}
+
+<script type='text/javascript'>
+	
+	
+	function setState(id, state) {
+        bla = new Request.HTML({url:'{% url kiosk_set %}'}).post({'id': id, 'state': state});
+    }
+    
+    //$('button_allow').addEvent('onclick', setState({{request.id}},'a'));
+</script>

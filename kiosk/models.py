@@ -19,13 +19,15 @@ STREAM_ALLOWED = 'a'
 STREAM_PLAYING = 'p'
 STREAM_FINISHED = 'f'
 STREAM_ERROR = 'e'
+STREAM_ABORT = 'x'
 
 STREAM_CHOICES =((STREAM_NEW, "NEW"),
                   (STREAM_DENIED, "DENIED"),
                   (STREAM_ALLOWED, "ALLOWED"),
                   (STREAM_PLAYING, "PLAYING"),
                   (STREAM_FINISHED, "FINISHED"),
-                  (STREAM_ERROR, "ERROR"))
+                  (STREAM_ERROR, "ERROR"),
+                  (STREAM_ABORT, "ABORT"))
 
 class HistoryManager(models.Manager):
     def get_latest(self):
@@ -46,7 +48,16 @@ class HistoryManager(models.Manager):
         
         new.save()
         self.trim()
+    
+    def push_stream(self, sr):
+        new = History(type = ITEM_TYPE_EXTERNAL_STREAM,
+                      title = sr.title,
+                      author = sr.author,
+                      streamRequest = sr)
         
+        new.save()
+        self.trim()
+            
     def trim(self):
         """Delete all but the newest 100"""
         for h in self.all()[100:]:
@@ -59,7 +70,7 @@ class History(models.Model):
     author = models.CharField(max_length=512)
     played = models.DateTimeField(auto_now_add = True)
     animationInstance = models.ForeignKey(AnimationInstance, blank=True, null=True)
-
+    streamRequest = models.ForeignKey('StreamRequest', blank=True, null=True)
     objects = HistoryManager()
     
     class Meta():
