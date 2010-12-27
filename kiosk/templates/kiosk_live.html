@@ -1,20 +1,46 @@
-<h1>Playing: {{now}}</h1>
-	{% if now.type == "l" or now.type == 'e' %}
-		SR:{{now.streamRequest.id}}
-		<button id = "button_abort" onclick = "setState({{now.streamRequest.id}},'x');">Abort</button>
-	{% endif %}
-{% if request %}
-	<h1>Request: {{request}}</h1>
-		<button id = "button_allow" onclick = "setState({{request.id}},'a');">Allow</button>
-		<button id = "button_deny" onclick = "setState({{request.id}}, 'd');">Deny</button>
-{% endif %}
+<table>
+	<tr>
+		<th></th>
+		<th>{% if now.type == 'e' %}Streaming{%else%}Playing{%endif%}</th>
+		<th>{% if request %}Request{% endif %}</th>
+	</tr>
+	<tr>
+		<th>Title</th>
+		<td>{{now.title}}</td>
+		<td>{{request.title}}</td>
+	</tr>
+	<tr>
+		<th>Author</th>
+		<td>{{now.author}}</td>
+		<td>{{request.author}}</td>
+	</tr>
+	<tr>
+		<th>since</th>
+		<td>{{now.played|timesince}}</td>
+		<td>{{request.request_date|timesince}}</td>
+	</tr>
+	<tr>
+		<th></th>
+		<td>
+			{% if now.type == 'e' %}
+				<button class = "red" id = "button_abort" onclick = "setState({{now.streamRequest.id}},'x');">Abort</button>
+			{%endif%}
+			
+		</td>
+		{% if request %}
+			<td>
+				<button id = "button_allow" onclick = "setState({{request.id}},'a');">Allow</button>
+				<button class = "red" id = "button_deny" onclick = "setState({{request.id}}, 'd');">Deny</button>
+			</td>
+		{% endif %}
+</table>
+
+
 
 <script type='text/javascript'>
-	
-	
 	function setState(id, state) {
         bla = new Request.HTML({url:'{% url kiosk_set %}'}).post({'id': id, 'state': state});
     }
     
-    //$('button_allow').addEvent('onclick', setState({{request.id}},'a'));
+    //$('button_abort').addEvent('click', setState({{request.id}},'a'));
 </script>
