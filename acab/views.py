@@ -20,7 +20,7 @@
 from django.conf import settings
 from django.template import RequestContext, loader
 from django.core import serializers
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render_to_response
 from models import *
 from forms import *

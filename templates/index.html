@@ -55,7 +55,10 @@
     </script>
   </head>
   <body>
-  	{% include "kiosk.html" %}
+  	{% if user.is_authenticated %}
+  		{% include "kiosk.html" %}
+  	{% else %}
+  	{% endif %}
     
     <a href="" onClick="return init_site()">
         <img src="{{ MEDIA_URL }}icons/acabed-logo.png" alt="AllColoursAreBeautiful Editor">

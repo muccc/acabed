@@ -157,8 +157,18 @@ def add(request, animation):
         dajax.script('MessageWidget.msg("The maximal duration of 60 seconds has been reached! Either delete frames or shoten the movie duration!")')
         return dajax.json()
     
-    form = AnimationForm(animation)
 
+    initial = {'title': datetime.now().strftime("%Y-%m-%d %H:%M"),
+                                               'description':"created at terminal",
+                                               'author': "random hacker",
+                                               'email': "ask@for.it"}
+
+    form = AnimationForm(animation, initial = initial )
+    if request.user.is_authenticated():
+        for key in initial:
+            if not form.data[key]:
+                form.data[key]=initial[key]
+            
     if form.is_valid():
         a = form.save()
 

@@ -4,8 +4,8 @@
 # install them with 'pip install -r requirements.txt'.
 
 Django==1.2.3
-django-dajaxice
-django-dajax
-django_compressor
-BeautifulSoup
+#django-dajaxice
+#django-dajax
+#django_compressor
+#BeautifulSoup
 PIL
