@@ -1,0 +1,11 @@
+Developer setup
+===============
+
+1. `git submodule init`
+2. `git submodule update`
+3. install dependencies: Django, PIL
+4. copy `settings.py.template.new` to `settings.py`
+5. run `python manage.py syncdb`
+6. start your own server `python manage.py runserver`
+
+Have fun && Happy hacking!
